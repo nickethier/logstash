@@ -3,3 +3,5 @@ rvm:
   - jruby-19mode
 
 script: make test
+
+before_install: bundle update
