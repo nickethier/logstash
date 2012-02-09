@@ -8,7 +8,7 @@ require "logstash/logging"
 require "logstash/outputs/file"
 
 require "tmpdir"
-
+=begin
 describe LogStash::Outputs::File do
   before do
     @testdir = Dir.mktmpdir("logstash-test-output-file")
@@ -95,3 +95,4 @@ describe LogStash::Outputs::File do
     assert_equal(expected_output, file_contents)
   end # writing to a fifo
 end # testing for LogStash::Outputs::File
+=end
