@@ -8,7 +8,6 @@ require "logstash/logging"
 require "logstash/outputs/file"
 
 require "tmpdir"
-=begin
 describe LogStash::Outputs::File do
   before do
     @testdir = Dir.mktmpdir("logstash-test-output-file")
@@ -20,6 +19,7 @@ describe LogStash::Outputs::File do
   end # after
 
   test "basic file output" do
+    skip("Need to debug")
     test_file = File.join(@testdir, "out")
     @output = LogStash::Outputs::File.new({
       "type" => ["foo"],
@@ -42,6 +42,7 @@ describe LogStash::Outputs::File do
   end # basic file output
 
   test "file appending" do
+    skip("Need to debug")
     test_file = File.join(@testdir, "out")
     expected_output = ""
     File.open(test_file, "w") do |file|
@@ -68,6 +69,7 @@ describe LogStash::Outputs::File do
   end # file appending
 
   test "writing to a fifo" do
+    skip("Need to debug")
     test_file = File.join(@testdir, "out")
     res = Kernel.system("mkfifo", test_file)
     assert_equal(true, res)
@@ -95,4 +97,3 @@ describe LogStash::Outputs::File do
     assert_equal(expected_output, file_contents)
   end # writing to a fifo
 end # testing for LogStash::Outputs::File
-=end

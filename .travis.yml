@@ -2,8 +2,7 @@ language: ruby
 rvm:
   - jruby-19mode
 
-script: jruby --1.9 bin/logstash test
+script: ruby bin/logstash test
 
 before_install: 
-  - bundle update
   - make vendor-elasticsearch
