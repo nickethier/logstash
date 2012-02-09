@@ -19,9 +19,9 @@ describe LogStash::Outputs::File do
   end # after
 
   test "basic file output" do
-    skip("Need to debug")
     test_file = File.join(@testdir, "out")
     @output = LogStash::Outputs::File.new({
+      "flush_interval" => [0],
       "type" => ["foo"],
       "path" => [test_file],
       "message_format" => ["%{@message}/%{@source}"],
@@ -42,7 +42,6 @@ describe LogStash::Outputs::File do
   end # basic file output
 
   test "file appending" do
-    skip("Need to debug")
     test_file = File.join(@testdir, "out")
     expected_output = ""
     File.open(test_file, "w") do |file|
@@ -51,6 +50,7 @@ describe LogStash::Outputs::File do
     end
 
     @output = LogStash::Outputs::File.new({
+      "flush_interval" => [0],
       "type" => ["foo"],
       "path" => [test_file],
       "message_format" => ["%{@message}/%{@source}"],
@@ -69,18 +69,18 @@ describe LogStash::Outputs::File do
   end # file appending
 
   test "writing to a fifo" do
-    skip("Need to debug")
     test_file = File.join(@testdir, "out")
     res = Kernel.system("mkfifo", test_file)
     assert_equal(true, res)
 
     @output = LogStash::Outputs::File.new({
+      "flush_interval" => [0],
       "type" => ["foo"],
       "path" => [test_file],
       "message_format" => ["%{@message}"],
     })
     @output.register
-
+    skip("Blocks with no reader on the fifo")
     # put the write in a different thread, because it will
     # block with no reader on the fifo.
     Thread.new do
