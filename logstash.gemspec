@@ -23,9 +23,10 @@ Gem::Specification.new do |spec|
   spec.description = "scalable log and event management (search, archive, pipeline)"
   spec.license = "Apache License (2.0)"
 
-  spec.add_dependency "awesome_print" # MIT License
+  #spec.add_dependency "awesome_print" # MIT License
   spec.add_dependency "bunny" # for amqp support, MIT-style license
-  spec.add_dependency "cabin", "0.3.8" # for logging. apache 2 license
+  spec.add_dependency "ftw" # for amqp support, MIT-style license
+  spec.add_dependency "cabin", "0.4.4" # for logging. apache 2 license
   spec.add_dependency "aws-sdk" # for AWS access: SNS and S3 log tailing.  Apache 2.0 License
   spec.add_dependency "filewatch", "~> 0.3.3"  # for file tailing, BSD License
   spec.add_dependency "gelfd", "~> 0.2.0" #inputs/gelf, # License: Apache 2.0
@@ -33,11 +34,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency "gmetric", "~> 0.1.3" # outputs/ganglia, # License: MIT
   spec.add_dependency "haml" # License: MIT
   spec.add_dependency "jls-grok", "0.10.6" # for grok filter, BSD License
-  spec.add_dependency "jruby-elasticsearch", "~> 0.0.11" # BSD License
+  spec.add_dependency "lusis-jruby-elasticsearch", "~> 0.0.13" # BSD License
   spec.add_dependency "jruby-openssl" # For enabling SSL support, CPL/GPL 2.0
   spec.add_dependency "json" # Ruby license
   spec.add_dependency "minitest" # License: Ruby
-  spec.add_dependency "mizuno" # License: Apache 2.0
   spec.add_dependency "mongo" # outputs/mongodb, License: Apache 2.0
   spec.add_dependency "rack" # License: MIT
   spec.add_dependency "redis" # outputs/redis, License: MIT-style
@@ -45,7 +45,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "sass" # License: MIT
   spec.add_dependency "sinatra" # License: MIT-style
   spec.add_dependency "statsd-ruby", "~> 0.3.0" # outputs/statsd, # License: As-Is
-  spec.add_dependency "stomp" # for stomp protocol, Apache 2.0 License
+  spec.add_dependency "onstomp" # for stomp protocol, Apache 2.0 License
   spec.add_dependency "uuidtools" # for naming amqp queues, License ???
   spec.add_dependency "xmpp4r", "~> 0.5" # outputs/xmpp, # License: As-Is
   spec.add_dependency "mail" #outputs/email, # License: MIT License
@@ -59,8 +59,6 @@ Gem::Specification.new do |spec|
   spec.require_paths << "lib"
   spec.bindir = "bin"
   spec.executables << "logstash"
-  spec.executables << "logstash-web"
-  spec.executables << "logstash-test"
 
   spec.authors = ["Jordan Sissel", "Pete Fritchman"]
   spec.email = ["jls@semicomplete.com", "petef@databits.net"]
