@@ -22,6 +22,11 @@ class LogStash::Outputs::Stdout < LogStash::Outputs::Base
   public
   def register
     @print_method = method(:ap) rescue method(:p)
+
+    @codec.on_event do |data|
+      $stdout.write data
+    end
+
     if @debug
       case @debug_format
         when "ruby"
@@ -40,7 +45,7 @@ class LogStash::Outputs::Stdout < LogStash::Outputs::Base
               finished
               return
             end
-            puts event.to_json
+            @codec.encode_data(event.to_json)
           end
         when "dots"
           define_singleton_method(:receive) do |event|
@@ -61,7 +66,7 @@ class LogStash::Outputs::Stdout < LogStash::Outputs::Base
           finished
           return
         end
-        puts event.sprintf(@message)
+        @codec.encode_data(event.sprintf(@message))
       end
     end
   end

@@ -3,6 +3,7 @@ require "logstash/event"
 require "logstash/plugin"
 require "logstash/logging"
 require "logstash/config/mixin"
+require "logstash/codecs/base"
 
 # This is the base class for logstash inputs.
 class LogStash::Inputs::Base < LogStash::Plugin
@@ -30,6 +31,9 @@ class LogStash::Inputs::Base < LogStash::Plugin
 
   # The format of input data (plain, json, json_event)
   config :format, :validate => ["plain", "json", "json_event", "msgpack_event"]
+
+  # The codec used for input data
+  config :codec, :validate => :string, :default => 'plain'
 
   # The character encoding used in this input. Examples include "UTF-8"
   # and "cp1252"
@@ -67,6 +71,12 @@ class LogStash::Inputs::Base < LogStash::Plugin
     config_init(params)
     @tags ||= []
   end # def initialize
+
+  public
+  def set_queue(queue)
+    @codec = LogStash::Codecs.for(@codec).new(queue)
+    @codec.charset = @charset
+  end
 
   public
   def register

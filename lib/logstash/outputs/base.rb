@@ -29,10 +29,13 @@ class LogStash::Outputs::Base < LogStash::Plugin
   # Optional.
   config :fields, :validate => :array, :default => []
 
+  config :codec, :validate => :string, :default => "plain"
+
   public
   def initialize(params)
     super
     config_init(params)
+    @codec = LogStash::Codecs.for(@codec).new
   end
 
   public

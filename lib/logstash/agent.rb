@@ -719,6 +719,7 @@ class LogStash::Agent
 
     while !done
       begin
+        input.set_queue(queue)
         input.run(queue)
         done = true
         input.finished
