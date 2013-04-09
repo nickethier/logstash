@@ -70,7 +70,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency "mail"                             #(MIT license)
 
   if RUBY_PLATFORM == 'java'
-    gem.platform = RUBY_PLATFORM
     gem.add_runtime_dependency "jruby-elasticsearch", ["0.0.14"]  #(BSD license)
     gem.add_runtime_dependency "jruby-httpclient"                 #(Apache 2.0 license)
     gem.add_runtime_dependency "bouncy-castle-java", "1.5.0147"   #(MIT license)
