@@ -13,7 +13,7 @@ require "tempfile"
 # <http://www.maxmind.com/en/geolite>.
 class LogStash::Filters::GeoIP < LogStash::Filters::Base
   config_name "geoip"
-  plugin_status "experimental"
+  milestone 1
 
   # GeoIP database file to use, Country, City, ASN, ISP and organization
   # databases are supported
@@ -59,6 +59,8 @@ class LogStash::Filters::GeoIP < LogStash::Filters::Base
       else
         if File.exists?("GeoLiteCity.dat")
           @database = "GeoLiteCity.dat"
+        elsif File.exists?("vendor/geoip/GeoLiteCity.dat")
+          @database = "vendor/geoip/GeoLiteCity.dat"
         else
           raise "You must specify 'database => ...' in your geoip filter"
         end
