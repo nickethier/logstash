@@ -4,7 +4,7 @@ require "openssl"
 class LogStash::Codecs::Encryption < LogStash::Codecs::Base
   config_name "encryption"
 
-  plugin_status "experimental"
+  milestone 1
 
   config :public_key, :validate => :string, :default => nil
 
